@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owned.Grown | SNS Marketing</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Sans+KR:wght@200;300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .intro-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a0a;
+            overflow: hidden;
+        }
+
+        /* 배경 큰 로고 */
+        .bg-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+            animation: slowDrift 20s ease-in-out infinite alternate;
+        }
+
+        .bg-icons svg {
+            width: 320px;
+            height: 320px;
+        }
+
+        .bg-icons svg.bg-insta {
+            color: rgba(225, 48, 108, 0.13);
+        }
+
+        .bg-icons svg.bg-threads {
+            color: rgba(255, 255, 255, 0.09);
+        }
+
+        @keyframes slowDrift {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.05) rotate(1deg); }
+            100% { transform: scale(1) rotate(-1deg); }
+        }
+
+        /* 은은한 그라디언트 오버레이 */
+        .bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background:
+                radial-gradient(ellipse at 25% 40%, rgba(225, 48, 108, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 35% 60%, rgba(252, 175, 69, 0.08) 0%, transparent 40%),
+                radial-gradient(ellipse at 75% 40%, rgba(255, 255, 255, 0.07) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.85) 100%);
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        /* SNS 아이콘 영역 */
+        .sns-icons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 36px;
+            opacity: 0;
+            animation: fadeInUp 1.4s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .sns-icon-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.03);
+            transition: all 0.4s ease;
+            text-decoration: none;
+        }
+
+        .sns-icon-link:hover {
+            border-color: rgba(129, 140, 248, 0.4);
+            background: rgba(129, 140, 248, 0.08);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
+        }
+
+        .sns-icon-link svg {
+            width: 22px;
+            height: 22px;
+            color: rgba(255,255,255,0.6);
+            transition: color 0.3s;
+        }
+
+        .sns-icon-link:hover svg {
+            color: #818cf8;
+        }
+
+        .sns-divider {
+            width: 1px;
+            height: 20px;
+            background: rgba(255,255,255,0.12);
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            font-weight: 400;
+            color: #fff;
+            letter-spacing: 0.06em;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeInUp 1.4s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        .subtitle {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.45);
+            letter-spacing: 0.18em;
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: fadeInUp 1.4s ease forwards;
+            animation-delay: 0.9s;
+        }
+
+        .go-in-btn {
+            display: inline-block;
+            padding: 14px 72px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            transition: all 0.5s ease;
+            opacity: 0;
+            animation: fadeInUp 1.4s ease forwards;
+            animation-delay: 1.3s;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(6px);
+        }
+
+        .go-in-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: rgba(129, 140, 248, 0.4);
+            color: #818cf8;
+            transform: scale(1.02);
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.1);
+        }
+
+        .follower-info {
+            margin-top: 32px;
+            font-size: 0.68rem;
+            color: rgba(255,255,255,0.25);
+            letter-spacing: 0.12em;
+            opacity: 0;
+            animation: fadeInUp 1.4s ease forwards;
+            animation-delay: 1.7s;
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(25px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            opacity: 0;
+            animation: fadeInUp 1.4s ease forwards, floatUpDown 2.5s ease-in-out infinite;
+            animation-delay: 2.2s, 3.6s;
+        }
+
+        .scroll-hint span {
+            display: block;
+            width: 1px;
+            height: 30px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+            margin: 0 auto;
+        }
+
+        @keyframes floatUpDown {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 1.9rem;
+            }
+            .subtitle {
+                font-size: 0.7rem;
+                padding: 0 30px;
+            }
+            .go-in-btn {
+                padding: 12px 55px;
+                font-size: 0.7rem;
+            }
+            .bg-icons svg {
+                width: 200px;
+                height: 200px;
+            }
+            .bg-icons {
+                gap: 40px;
+            }
+            .sns-icon-link {
+                width: 42px;
+                height: 42px;
+            }
+            .sns-icon-link svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="intro-container">
+        <!-- 배경 큰 로고 -->
+        <div class="bg-icons">
+            <!-- Instagram 큰 배경 -->
+            <svg class="bg-insta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="5"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+            <!-- Threads 큰 배경 -->
+            <svg class="bg-threads" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.59 12c.025 3.086.718 5.496 2.057 7.164 1.432 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.278 3.258-.892 1.105-2.15 1.715-3.742 1.815-1.208.076-2.35-.2-3.216-.776-1.002-.666-1.607-1.678-1.703-2.849-.088-1.074.346-2.05 1.22-2.748.81-.646 1.93-1.025 3.232-1.096 1.078-.059 2.078.04 2.99.265-.133-.78-.473-1.376-.985-1.768-.642-.49-1.56-.73-2.727-.71l-.073.002c-.957.026-1.755.315-2.37.858l-1.345-1.518c.902-.798 2.07-1.238 3.382-1.272l.103-.002c1.67-.032 3.017.393 4.005 1.263.916.806 1.477 1.946 1.674 3.38.536.164 1.03.378 1.482.645 1.524.9 2.61 2.274 3.062 3.596.522 1.527.572 4.076-1.548 6.152-1.79 1.754-4.02 2.54-7.206 2.564zM14.474 14c-.702-.04-2.449-.086-3.346.63-.456.363-.605.823-.567 1.288.063.767.584 1.577 2.117 1.577l.255-.01c1.064-.067 1.874-.46 2.41-1.123.41-.507.676-1.2.823-2.064-.535-.167-1.108-.272-1.692-.298z"/>
+            </svg>
+        </div>
+        <div class="bg-gradient"></div>
+        <div class="content">
+            <!-- 인스타그램 & 스레드 아이콘 -->
+            <div class="sns-icons">
+                <a href="https://www.instagram.com/owned.grown/" target="_blank" class="sns-icon-link">
+                    <!-- Instagram -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <circle cx="12" cy="12" r="5"/>
+                        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                    </svg>
+                </a>
+                <div class="sns-divider"></div>
+                <a href="https://www.threads.com/@owned.grown" target="_blank" class="sns-icon-link">
+                    <!-- Threads -->
+                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                        <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.59 12c.025 3.086.718 5.496 2.057 7.164 1.432 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.278 3.258-.892 1.105-2.15 1.715-3.742 1.815-1.208.076-2.35-.2-3.216-.776-1.002-.666-1.607-1.678-1.703-2.849-.088-1.074.346-2.05 1.22-2.748.81-.646 1.93-1.025 3.232-1.096 1.078-.059 2.078.04 2.99.265-.133-.78-.473-1.376-.985-1.768-.642-.49-1.56-.73-2.727-.71l-.073.002c-.957.026-1.755.315-2.37.858l-1.345-1.518c.902-.798 2.07-1.238 3.382-1.272l.103-.002c1.67-.032 3.017.393 4.005 1.263.916.806 1.477 1.946 1.674 3.38.536.164 1.03.378 1.482.645 1.524.9 2.61 2.274 3.062 3.596.522 1.527.572 4.076-1.548 6.152-1.79 1.754-4.02 2.54-7.206 2.564zM14.474 14c-.702-.04-2.449-.086-3.346.63-.456.363-.605.823-.567 1.288.063.767.584 1.577 2.117 1.577l.255-.01c1.064-.067 1.874-.46 2.41-1.123.41-.507.676-1.2.823-2.064-.535-.167-1.108-.272-1.692-.298z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <h1 class="title">Owned.Grown</h1>
+            <p class="subtitle">조회수가 매출이 된다</p>
+            <a href="home.html" class="go-in-btn">go in</a>
+            <p class="follower-info">SNS 총 팔로워 13만 마케팅 커뮤니티</p>
+        </div>
+        <div class="scroll-hint">
+            <span></span>
+        </div>
+    </div>
+</body>
+</html>

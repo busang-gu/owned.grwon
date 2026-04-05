@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owned.Grown | SNS Marketing</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Sans+KR:wght@200;300;400;500;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            filter: brightness(0.06) saturate(0.3);
+            z-index: -1;
+        }
+
+        /* 네비게이션 */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 24px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: color 0.3s;
+        }
+
+        .nav-logo:hover {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #818cf8;
+        }
+
+        /* 섹션 공통 */
+        section {
+            padding: 100px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .section-title-sm {
+            font-size: 0.65rem;
+            color: rgba(129, 140, 248, 0.7);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        /* ===== 히어로 섹션 ===== */
+        .hero {
+            padding-top: 160px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 5px 18px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
+            font-size: 0.65rem;
+            color: #818cf8;
+            letter-spacing: 0.15em;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #818cf8;
+        }
+
+        .hero p {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ===== 포트폴리오 섹션 ===== */
+        #portfolio {
+            padding-top: 120px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .portfolio-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .portfolio-cover {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-card:nth-child(1) .portfolio-cover {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        .portfolio-card:nth-child(2) .portfolio-cover {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1a3d 50%, #1a1a2e 100%);
+        }
+
+        .portfolio-card:nth-child(3) .portfolio-cover {
+            background: linear-gradient(135deg, #0a1a2a 0%, #1a2d3d 50%, #1a1a1a 100%);
+        }
+
+        .portfolio-icon {
+            font-size: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .portfolio-number {
+            position: absolute;
+            top: 12px;
+            left: 16px;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .portfolio-info {
+            padding: 20px;
+        }
+
+        .portfolio-info h3 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .portfolio-info p {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.6;
+        }
+
+        .portfolio-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            background: rgba(99, 102, 241, 0.15);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            color: #818cf8;
+            margin-top: 12px;
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== 차별화 카피 섹션 ===== */
+        .diff-section {
+            text-align: center;
+            padding: 120px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .diff-section .main-copy {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .diff-section .sub-copy {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.6);
+            line-height: 2;
+        }
+
+        .diff-section .sub-copy strong {
+            color: #fff;
+            font-weight: 500;
+            text-decoration: underline;
+            text-decoration-color: #818cf8;
+            text-underline-offset: 4px;
+        }
+
+        .diff-section .closing {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.35);
+            margin-top: 25px;
+        }
+
+        /* ===== ABOUT 섹션 ===== */
+        .about-content {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .about-content .quote {
+            font-size: 1.05rem;
+            font-weight: 500;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .about-content .quote span {
+            color: #818cf8;
+        }
+
+        .about-content .desc {
+            font-size: 0.78rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.55);
+            line-height: 2;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: rgba(99, 102, 241, 0.4);
+            margin: 0 auto 30px;
+        }
+
+        /* ===== 서비스 카드 섹션 ===== */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .service-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 14px;
+            padding: 35px 28px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: rgba(99, 102, 241, 0.2);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .service-card h3 {
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #818cf8;
+        }
+
+        .service-card p {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.7;
+        }
+
+        /* ===== 프로세스 섹션 ===== */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .process-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .process-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: rgba(99, 102, 241, 0.3);
+            margin-bottom: 14px;
+        }
+
+        .process-card h3 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .process-card p {
+            font-size: 0.68rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.6;
+        }
+
+        /* ===== 플랜 섹션 ===== */
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .plan-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card.featured {
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .plan-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .plan-price {
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #818cf8;
+            margin-bottom: 25px;
+        }
+
+        .plan-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .plan-card ul li {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.55);
+            line-height: 2;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .plan-card ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            color: #818cf8;
+        }
+
+        .plan-recommend {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .plan-recommend h4 {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #818cf8;
+            margin-bottom: 10px;
+        }
+
+        .coming-soon-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(3px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+        }
+
+        .coming-soon-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            color: rgba(129, 140, 248, 0.7);
+        }
+
+        /* ===== 후기 섹션 ===== */
+        .review-area {
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== CONTACT 섹션 ===== */
+        #contact {
+            text-align: center;
+            padding-bottom: 60px;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 40px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 60px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+            min-width: 320px;
+            justify-content: center;
+        }
+
+        .contact-item:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            background: rgba(99, 102, 241, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .contact-icon {
+            font-size: 1.2rem;
+        }
+
+        .contact-item span {
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+        }
+
+        /* ===== 문의하기 CTA ===== */
+        .cta-section {
+            text-align: center;
+            padding: 60px 40px 100px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .cta-subtitle {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 20px;
+        }
+
+        .inquiry-btn {
+            display: inline-block;
+            padding: 18px 80px;
+            background: #6366f1;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .inquiry-btn:hover {
+            background: #818cf8;
+            transform: translateY(-2px);
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(99, 102, 241, 0.3), 0 0 20px rgba(99, 102, 241, 0.1); }
+            50% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.6), 0 0 40px rgba(99, 102, 241, 0.3), 0 0 60px rgba(99, 102, 241, 0.1); }
+        }
+
+        /* 푸터 */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer p {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.25);
+            letter-spacing: 0.05em;
+        }
+
+        /* 애니메이션 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 18px 20px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            section {
+                padding: 70px 20px;
+            }
+
+            .hero {
+                padding-top: 130px;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 0.78rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .portfolio-cover {
+                height: 160px;
+            }
+
+            .diff-section {
+                padding: 80px 20px;
+            }
+
+            .diff-section .main-copy {
+                font-size: 1rem;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .plan-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .about-content .quote {
+                font-size: 0.92rem;
+            }
+
+            .contact-item {
+                min-width: auto;
+                width: 100%;
+                max-width: 320px;
+                padding: 16px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 네비게이션 -->
+    <nav class="nav">
+        <a href="https://www.instagram.com/owned.grown/" target="_blank" class="nav-logo">
+            <svg class="insta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            owned.grown
+        </a>
+        <div class="nav-links">
+            <a href="#portfolio">Portfolio</a>
+            <a href="#about">About</a>
+            <a href="#service">Service</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <section class="hero">
+        <div class="hero-badge">SNS 총 팔로워 13만 마케팅 커뮤니티</div>
+        <h1>조회수가 매출이 된다<br><span>Owned.Grown</span></h1>
+        <p>인스타그램과 스레드를 중심으로<br>브랜드의 조회수를 매출로 바꿔드립니다</p>
+    </section>
+
+    <!-- 포트폴리오 섹션 -->
+    <section id="portfolio" class="fade-in">
+        <p class="section-title-sm">PORTFOLIO</p>
+        <h2 class="section-title">Our Work</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <div class="portfolio-cover">
+                    <span class="portfolio-number">01</span>
+                    <span class="portfolio-icon">📱</span>
+                </div>
+                <div class="portfolio-info">
+                    <h3>인스타그램 마케팅</h3>
+                    <p>피드, 릴스, 스토리까지<br>매출로 이어지는 인스타그램 전략</p>
+                    <span class="portfolio-badge">INSTAGRAM</span>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <div class="portfolio-cover">
+                    <span class="portfolio-number">02</span>
+                    <span class="portfolio-icon">🧵</span>
+                </div>
+                <div class="portfolio-info">
+                    <h3>스레드 마케팅</h3>
+                    <p>텍스트 기반 바이럴 콘텐츠로<br>브랜드 인지도를 폭발적으로 확장</p>
+                    <span class="portfolio-badge">THREADS</span>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <div class="portfolio-cover">
+                    <span class="portfolio-number">03</span>
+                    <span class="portfolio-icon">📊</span>
+                </div>
+                <div class="portfolio-info">
+                    <h3>통합 SNS 전략</h3>
+                    <p>인스타그램 x 스레드 연동으로<br>시너지를 극대화하는 통합 마케팅</p>
+                    <span class="portfolio-badge">INTEGRATED</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 차별화 카피 섹션 -->
+    <section class="diff-section fade-in">
+        <p class="main-copy">조회수만 높은 콘텐츠는 만들지 않습니다.</p>
+        <p class="sub-copy">
+            <strong>조회수가 매출로 이어지는 구조</strong>를 설계하고<br>
+            <strong>인스타그램과 스레드</strong>에서 확실한 성과를 만드는 것<br>
+        </p>
+        <p class="closing">그것이 Owned.Grown이 하는 마케팅입니다.</p>
+    </section>
+
+    <!-- ABOUT 섹션 -->
+    <section id="about" class="fade-in">
+        <p class="section-title-sm">ABOUT</p>
+        <h2 class="section-title">Owned.Grown</h2>
+        <div class="about-content">
+            <p class="quote">
+                조회수가 <span>매출</span>이 된다.
+            </p>
+            <div class="divider"></div>
+            <p class="desc">
+                SNS 총 팔로워 13만, 마케팅 커뮤니티 대표.<br>
+                인스타그램과 스레드를 중심으로<br>
+                브랜드의 콘텐츠를 매출로 연결합니다.<br>
+                감이 아닌 데이터로, 트렌드가 아닌 전략으로.
+            </p>
+        </div>
+    </section>
+
+    <!-- 서비스 섹션 -->
+    <section id="service" class="fade-in">
+        <p class="section-title-sm">WHAT WE DO</p>
+        <h2 class="section-title">Service</h2>
+        <div class="service-grid">
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>인스타그램 운영</h3>
+                <p>피드, 릴스, 스토리, 하이라이트<br>채널 전체를 전략적으로 운영</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🧵</div>
+                <h3>스레드 운영</h3>
+                <p>텍스트 기반 바이럴 콘텐츠<br>스레드 채널 성장 전략</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <h3>매출 전환 설계</h3>
+                <p>조회수를 매출로 바꾸는<br>퍼널 설계 및 전환 최적화</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 프로세스 섹션 -->
+    <section id="process" class="fade-in">
+        <p class="section-title-sm">HOW WE WORK</p>
+        <h2 class="section-title">Process</h2>
+        <div class="process-grid">
+            <div class="process-card">
+                <div class="process-number">01</div>
+                <h3>상담</h3>
+                <p>브랜드 현황 파악 및<br>목표 설정</p>
+            </div>
+            <div class="process-card">
+                <div class="process-number">02</div>
+                <h3>전략 수립</h3>
+                <p>채널별 콘텐츠<br>전략 기획</p>
+            </div>
+            <div class="process-card">
+                <div class="process-number">03</div>
+                <h3>제작 & 운영</h3>
+                <p>콘텐츠 제작 및<br>채널 운영</p>
+            </div>
+            <div class="process-card">
+                <div class="process-number">04</div>
+                <h3>리포트</h3>
+                <p>월간 성과 분석 및<br>개선안 제안</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 플랜 섹션 -->
+    <section id="plan" class="fade-in">
+        <p class="section-title-sm">PRICING</p>
+        <h2 class="section-title">Plan</h2>
+        <div class="plan-grid">
+            <div class="plan-card">
+                <h3>BASIC</h3>
+                <p class="plan-price">상담 후 안내</p>
+                <ul>
+                    <li>SNS 채널 1개 운영</li>
+                    <li>월 12회 콘텐츠 발행</li>
+                    <li>기본 피드 디자인</li>
+                    <li>월간 리포트 제공</li>
+                </ul>
+                <div class="coming-soon-overlay">
+                    <span class="coming-soon-text">COMING SOON</span>
+                </div>
+            </div>
+            <div class="plan-card featured">
+                <h3>STANDARD</h3>
+                <p class="plan-price">상담 후 안내</p>
+                <ul>
+                    <li>SNS 채널 2개 운영</li>
+                    <li>월 20회 콘텐츠 발행</li>
+                    <li>릴스/숏폼 제작 포함</li>
+                    <li>광고 운영 기본 세팅</li>
+                    <li>주간 리포트 제공</li>
+                </ul>
+                <div class="coming-soon-overlay">
+                    <span class="coming-soon-text">COMING SOON</span>
+                </div>
+            </div>
+            <div class="plan-card">
+                <h3>PREMIUM</h3>
+                <p class="plan-price">상담 후 안내</p>
+                <ul>
+                    <li>SNS 전 채널 통합 운영</li>
+                    <li>무제한 콘텐츠 발행</li>
+                    <li>숏폼 + 롱폼 제작</li>
+                    <li>광고 최적화 운영</li>
+                    <li>전담 매니저 배정</li>
+                    <li>실시간 커뮤니케이션</li>
+                </ul>
+                <div class="coming-soon-overlay">
+                    <span class="coming-soon-text">COMING SOON</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 후기 섹션 -->
+    <section id="review" class="fade-in">
+        <p class="section-title-sm">REVIEW</p>
+        <h2 class="section-title">Client Review</h2>
+        <div class="review-area">
+            <div class="coming-soon-overlay" style="position:relative; min-height:150px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
+                <span class="coming-soon-text">COMING SOON</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT 섹션 -->
+    <section id="contact" class="fade-in">
+        <p class="section-title-sm">GET IN TOUCH</p>
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-links">
+            <a href="https://www.instagram.com/owned.grown/" target="_blank" class="contact-item">
+                <svg class="contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                <span>@owned.grown</span>
+            </a>
+            <a href="https://www.threads.com/@owned.grown" target="_blank" class="contact-item">
+                <span class="contact-icon">🧵</span>
+                <span>@owned.grown (Threads)</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 문의하기 CTA -->
+    <div class="cta-section fade-in">
+        <p class="cta-subtitle">조회수를 매출로 바꾸고 싶다면</p>
+        <a href="https://www.instagram.com/owned.grown/" target="_blank" class="inquiry-btn">문의하기</a>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+        <p>&copy; 2025 Owned.Grown. All rights reserved.</p>
+    </footer>
+
+    <!-- 스크롤 애니메이션 -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
