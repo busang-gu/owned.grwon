@@ -149,41 +149,48 @@
         }
 
         .subtitle {
-            font-size: 0.82rem;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.45);
-            letter-spacing: 0.18em;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.2em;
             margin-bottom: 50px;
             opacity: 0;
             animation: fadeInUp 1.4s ease forwards;
             animation-delay: 0.9s;
+            text-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
 
         .go-in-btn {
             display: inline-block;
-            padding: 14px 72px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 16px 76px;
+            border: 1px solid rgba(225, 48, 108, 0.4);
             border-radius: 50px;
-            color: rgba(255,255,255,0.75);
+            color: #fff;
             text-decoration: none;
             font-family: 'Playfair Display', serif;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             letter-spacing: 0.4em;
             text-transform: uppercase;
             transition: all 0.5s ease;
             opacity: 0;
-            animation: fadeInUp 1.4s ease forwards;
-            animation-delay: 1.3s;
-            background: rgba(255, 255, 255, 0.02);
+            animation: fadeInUp 1.4s ease forwards, btnPulse 3s ease-in-out infinite;
+            animation-delay: 1.3s, 2.7s;
+            background: linear-gradient(135deg, rgba(225, 48, 108, 0.15), rgba(131, 58, 180, 0.15));
             backdrop-filter: blur(6px);
+            box-shadow: 0 0 20px rgba(225, 48, 108, 0.1), 0 0 40px rgba(131, 58, 180, 0.05);
         }
 
         .go-in-btn:hover {
-            background: rgba(99, 102, 241, 0.1);
-            border-color: rgba(129, 140, 248, 0.4);
-            color: #818cf8;
-            transform: scale(1.02);
-            box-shadow: 0 0 40px rgba(99, 102, 241, 0.1);
+            background: linear-gradient(135deg, rgba(225, 48, 108, 0.3), rgba(131, 58, 180, 0.3));
+            border-color: rgba(225, 48, 108, 0.6);
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(225, 48, 108, 0.25), 0 0 60px rgba(131, 58, 180, 0.15);
+        }
+
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(225, 48, 108, 0.1), 0 0 40px rgba(131, 58, 180, 0.05); }
+            50% { box-shadow: 0 0 30px rgba(225, 48, 108, 0.2), 0 0 60px rgba(131, 58, 180, 0.12); }
         }
 
         .follower-info {
