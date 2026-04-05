@@ -15,22 +15,11 @@
 
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background: #0a0a0a;
-            color: #fff;
+            background: #f5f0e8;
+            color: #1a1a1a;
             overflow-x: hidden;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-            filter: brightness(0.06) saturate(0.3);
-            z-index: -1;
-        }
 
         /* 네비게이션 */
         .nav {
@@ -43,13 +32,13 @@
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+            background: linear-gradient(to bottom, rgba(245,240,232,0.95), transparent);
         }
 
         .nav-logo {
             font-family: 'Playfair Display', serif;
             font-size: 0.8rem;
-            color: rgba(255,255,255,0.6);
+            color: rgba(30,30,30,0.5);
             letter-spacing: 0.1em;
             text-decoration: none;
             display: flex;
@@ -59,7 +48,7 @@
         }
 
         .nav-logo:hover {
-            color: rgba(255,255,255,0.9);
+            color: rgba(30,30,30,0.9);
         }
 
         .nav-links {
@@ -68,9 +57,9 @@
         }
 
         .nav-links a {
-            color: rgba(255,255,255,0.5);
+            color: rgba(30,30,30,0.6);
             text-decoration: none;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             letter-spacing: 0.05em;
             transition: color 0.3s;
         }
@@ -88,17 +77,17 @@
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
+            font-size: 1.8rem;
             font-weight: 400;
             text-align: center;
             margin-bottom: 40px;
             letter-spacing: 0.1em;
-            color: rgba(255,255,255,0.9);
+            color: rgba(30,30,30,0.9);
         }
 
         .section-title-sm {
-            font-size: 0.65rem;
-            color: rgba(129, 140, 248, 0.7);
+            font-size: 0.78rem;
+            color: rgba(129, 140, 248, 0.9);
             letter-spacing: 0.2em;
             text-transform: uppercase;
             text-align: center;
@@ -116,15 +105,15 @@
             padding: 5px 18px;
             border: 1px solid rgba(99, 102, 241, 0.3);
             border-radius: 50px;
-            font-size: 0.65rem;
-            color: #818cf8;
+            font-size: 0.78rem;
+            color: #6366f1;
             letter-spacing: 0.15em;
             margin-bottom: 30px;
         }
 
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 2.6rem;
             font-weight: 400;
             line-height: 1.3;
             margin-bottom: 20px;
@@ -135,9 +124,9 @@
         }
 
         .hero p {
-            font-size: 0.85rem;
-            font-weight: 300;
-            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
+            font-weight: 400;
+            color: rgba(30,30,30,0.65);
             line-height: 1.8;
             max-width: 500px;
             margin: 0 auto;
@@ -155,8 +144,8 @@
         }
 
         .portfolio-card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.07);
             border-radius: 12px;
             overflow: hidden;
             transition: all 0.4s ease;
@@ -202,7 +191,7 @@
             left: 16px;
             font-family: 'Playfair Display', serif;
             font-size: 0.75rem;
-            color: rgba(255,255,255,0.4);
+            color: rgba(30,30,30,0.3);
         }
 
         .portfolio-info {
@@ -210,27 +199,51 @@
         }
 
         .portfolio-info h3 {
-            font-size: 0.85rem;
+            font-size: 1rem;
             font-weight: 500;
             margin-bottom: 8px;
             line-height: 1.4;
         }
 
         .portfolio-info p {
-            font-size: 0.72rem;
-            color: rgba(255,255,255,0.45);
+            font-size: 0.85rem;
+            color: rgba(30,30,30,0.6);
             line-height: 1.6;
         }
 
         .portfolio-badge {
             display: inline-block;
-            padding: 3px 10px;
+            padding: 4px 12px;
             background: rgba(99, 102, 241, 0.15);
             border-radius: 4px;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             color: #818cf8;
             margin-top: 12px;
             letter-spacing: 0.05em;
+        }
+
+        .community-btn {
+            display: block;
+            text-align: center;
+            margin: 40px auto 0;
+            padding: 16px 50px;
+            background: linear-gradient(135deg, rgba(225, 48, 108, 0.1), rgba(131, 58, 180, 0.1));
+            border: 1px solid rgba(225, 48, 108, 0.3);
+            border-radius: 50px;
+            color: #e1306c;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            max-width: 300px;
+        }
+
+        .community-btn:hover {
+            background: linear-gradient(135deg, rgba(225, 48, 108, 0.2), rgba(131, 58, 180, 0.2));
+            border-color: rgba(225, 48, 108, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(225, 48, 108, 0.15);
         }
 
         /* ===== 차별화 카피 섹션 ===== */
@@ -242,30 +255,32 @@
         }
 
         .diff-section .main-copy {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 30px;
             line-height: 1.6;
         }
 
         .diff-section .sub-copy {
-            font-size: 0.8rem;
-            font-weight: 300;
-            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
+            font-weight: 400;
+            color: rgba(30,30,30,0.65);
             line-height: 2;
         }
 
         .diff-section .sub-copy strong {
-            color: #fff;
-            font-weight: 500;
-            text-decoration: underline;
-            text-decoration-color: #818cf8;
-            text-underline-offset: 4px;
+            color: #1a1a1a;
+            font-weight: 700;
+            font-size: 1.15rem;
+            background: linear-gradient(135deg, #e1306c, #833ab4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .diff-section .closing {
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.35);
+            font-size: 0.9rem;
+            color: rgba(30,30,30,0.5);
             margin-top: 25px;
         }
 
@@ -277,7 +292,7 @@
         }
 
         .about-content .quote {
-            font-size: 1.05rem;
+            font-size: 1.3rem;
             font-weight: 500;
             line-height: 1.8;
             margin-bottom: 30px;
@@ -288,9 +303,9 @@
         }
 
         .about-content .desc {
-            font-size: 0.78rem;
-            font-weight: 300;
-            color: rgba(255,255,255,0.55);
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: rgba(30,30,30,0.6);
             line-height: 2;
         }
 
@@ -309,8 +324,8 @@
         }
 
         .service-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.07);
+            background: rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.06);
             border-radius: 14px;
             padding: 35px 28px;
             text-align: center;
@@ -319,7 +334,7 @@
 
         .service-card:hover {
             border-color: rgba(99, 102, 241, 0.2);
-            background: rgba(255,255,255,0.05);
+            background: rgba(0,0,0,0.04);
         }
 
         .service-icon {
@@ -328,15 +343,15 @@
         }
 
         .service-card h3 {
-            font-size: 0.88rem;
+            font-size: 1.05rem;
             font-weight: 600;
             margin-bottom: 10px;
             color: #818cf8;
         }
 
         .service-card p {
-            font-size: 0.72rem;
-            color: rgba(255,255,255,0.5);
+            font-size: 0.88rem;
+            color: rgba(30,30,30,0.6);
             line-height: 1.7;
         }
 
@@ -348,8 +363,8 @@
         }
 
         .process-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.07);
             border-radius: 14px;
             padding: 30px 20px;
             text-align: center;
@@ -365,15 +380,15 @@
         }
 
         .process-card h3 {
-            font-size: 0.82rem;
+            font-size: 1rem;
             font-weight: 600;
             margin-bottom: 10px;
-            color: #fff;
+            color: #1a1a1a;
         }
 
         .process-card p {
-            font-size: 0.68rem;
-            color: rgba(255,255,255,0.45);
+            font-size: 0.85rem;
+            color: rgba(30,30,30,0.6);
             line-height: 1.6;
         }
 
@@ -385,8 +400,8 @@
         }
 
         .plan-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.07);
             border-radius: 14px;
             padding: 40px 30px;
             position: relative;
@@ -420,8 +435,8 @@
         }
 
         .plan-card ul li {
-            font-size: 0.72rem;
-            color: rgba(255,255,255,0.55);
+            font-size: 0.88rem;
+            color: rgba(30,30,30,0.6);
             line-height: 2;
             padding-left: 16px;
             position: relative;
@@ -437,11 +452,11 @@
         .plan-recommend {
             margin-top: 24px;
             padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.06);
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
 
         .plan-recommend h4 {
-            font-size: 0.72rem;
+            font-size: 0.88rem;
             font-weight: 600;
             color: #818cf8;
             margin-bottom: 10px;
@@ -453,7 +468,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10,10,10,0.85);
+            background: rgba(245,240,232,0.88);
             backdrop-filter: blur(3px);
             display: flex;
             align-items: center;
@@ -496,11 +511,11 @@
             align-items: center;
             gap: 14px;
             padding: 18px 40px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.07);
             border-radius: 60px;
             text-decoration: none;
-            color: #fff;
+            color: #1a1a1a;
             transition: all 0.3s ease;
             min-width: 320px;
             justify-content: center;
@@ -517,7 +532,7 @@
         }
 
         .contact-item span {
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             font-weight: 400;
             letter-spacing: 0.03em;
         }
@@ -531,8 +546,8 @@
         }
 
         .cta-subtitle {
-            font-size: 0.7rem;
-            color: rgba(255,255,255,0.35);
+            font-size: 0.9rem;
+            color: rgba(30,30,30,0.5);
             margin-bottom: 20px;
         }
 
@@ -543,7 +558,7 @@
             color: #fff;
             text-decoration: none;
             border-radius: 50px;
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 700;
             letter-spacing: 0.05em;
             transition: all 0.3s ease;
@@ -564,12 +579,12 @@
         footer {
             text-align: center;
             padding: 40px;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(0,0,0,0.04);
         }
 
         footer p {
             font-size: 0.72rem;
-            color: rgba(255,255,255,0.25);
+            color: rgba(30,30,30,0.2);
             letter-spacing: 0.05em;
         }
 
@@ -666,7 +681,7 @@
             owned.grown
         </a>
         <div class="nav-links">
-            <a href="#portfolio">Portfolio</a>
+            <a href="#portfolio">Free</a>
             <a href="#about">About</a>
             <a href="#service">Service</a>
             <a href="#contact">Contact</a>
@@ -682,8 +697,8 @@
 
     <!-- 포트폴리오 섹션 -->
     <section id="portfolio" class="fade-in">
-        <p class="section-title-sm">PORTFOLIO</p>
-        <h2 class="section-title">Our Work</h2>
+        <p class="section-title-sm">FREE EBOOK</p>
+        <h2 class="section-title">무료 전자책</h2>
         <div class="portfolio-grid">
             <div class="portfolio-card">
                 <div class="portfolio-cover">
@@ -719,6 +734,9 @@
                 </div>
             </div>
         </div>
+        <a href="https://open.kakao.com/o/ggntpAli" target="_blank" class="community-btn">
+            💬 무료 정보방 입장
+        </a>
     </section>
 
     <!-- 차별화 카피 섹션 -->
@@ -774,28 +792,28 @@
 
     <!-- 프로세스 섹션 -->
     <section id="process" class="fade-in">
-        <p class="section-title-sm">HOW WE WORK</p>
-        <h2 class="section-title">Process</h2>
+        <p class="section-title-sm">WHAT YOU GET</p>
+        <h2 class="section-title">Value</h2>
         <div class="process-grid">
             <div class="process-card">
                 <div class="process-number">01</div>
-                <h3>상담</h3>
-                <p>브랜드 현황 파악 및<br>목표 설정</p>
+                <h3>SNS 계정 컨설팅</h3>
+                <p>현재 계정을 진단하고<br>성장 전략을 설계합니다</p>
             </div>
             <div class="process-card">
                 <div class="process-number">02</div>
-                <h3>전략 수립</h3>
-                <p>채널별 콘텐츠<br>전략 기획</p>
+                <h3>콘텐츠 기획</h3>
+                <p>매출로 이어지는<br>콘텐츠를 함께 기획합니다</p>
             </div>
             <div class="process-card">
                 <div class="process-number">03</div>
-                <h3>제작 & 운영</h3>
-                <p>콘텐츠 제작 및<br>채널 운영</p>
+                <h3>해외 최신 트렌드</h3>
+                <p>글로벌 마케팅 트렌드를<br>빠르게 공유합니다</p>
             </div>
             <div class="process-card">
                 <div class="process-number">04</div>
-                <h3>리포트</h3>
-                <p>월간 성과 분석 및<br>개선안 제안</p>
+                <h3>오프라인 세미나</h3>
+                <p>멤버 전용 세미나<br>우선 참여권을 드립니다</p>
             </div>
         </div>
     </section>
@@ -855,7 +873,7 @@
         <p class="section-title-sm">REVIEW</p>
         <h2 class="section-title">Client Review</h2>
         <div class="review-area">
-            <div class="coming-soon-overlay" style="position:relative; min-height:150px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);">
+            <div class="coming-soon-overlay" style="position:relative; min-height:150px; border-radius:14px; background:rgba(0,0,0,0.02); border:1px solid rgba(0,0,0,0.07);">
                 <span class="coming-soon-text">COMING SOON</span>
             </div>
         </div>
